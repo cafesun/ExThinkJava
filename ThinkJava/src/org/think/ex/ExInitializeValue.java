@@ -26,6 +26,11 @@ class InitializeValue {
 	
 }
 
+/**
+ * 
+ * @author cafesun
+ *
+ */
 class InitializeWithValue {
 	boolean bVar = true;
 	byte byVar = 127;
