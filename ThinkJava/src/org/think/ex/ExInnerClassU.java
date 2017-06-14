@@ -10,6 +10,10 @@ interface InterfaceU {
 
 class Execise22A {
 	
+	public Execise22A() {
+		
+	}
+	
 	public InterfaceU makeInterfaceU() {
 		return new InterfaceU() {
 			public void funcA () {
@@ -37,26 +41,31 @@ class Execise22B {
 	public Execise22B () {
 		
 		arInterfaces = new InterfaceU[16];
+		iCount = 0;
 	}
 	
 	public void addInterface(InterfaceU varInterface) {
-		if (arInterfaces.length >= 16) {
+		if (iCount >= arInterfaces.length) {
 			return;
 		}
 		else {
-			arInterfaces[arInterfaces.length -1] = varInterface;
+			arInterfaces[iCount++] = varInterface;
 		}
 	}
 	
-	public void clearInterface(int i) {
-		if (i >= arInterfaces.length) {
-			return;
+	public void clearInterface() {
+		int iSize = iCount;
+		for (int i = 0; i < iSize; i++) {
+			arInterfaces[i] = null;
+			iCount--;
 		}
-		arInterfaces[i] = null;
 	}
 	
 	public void walkAll () {
 		for (int i = 0; i < arInterfaces.length; i++) {
+			if (arInterfaces[i] == null) {
+				continue;
+			}
 			arInterfaces[i].funcA();
 			arInterfaces[i].funcB();
 			arInterfaces[i].funcC();
@@ -65,6 +74,8 @@ class Execise22B {
 	 
 
 	private InterfaceU[] arInterfaces;
+	
+	private int iCount;
 
 }
 
@@ -72,11 +83,15 @@ public class ExInnerClassU {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		Execise22A arExercizeA[] = new Execise22A[12];
+		Execise22A[] arExercizeA = new Execise22A[12];
+		for (int i = 0; i < arExercizeA.length; i++) {
+			arExercizeA[i] = new Execise22A();
+		}
 		Execise22B varExercizeB = new Execise22B();
 		for (Execise22A varA : arExercizeA) {
 			varExercizeB.addInterface(varA.makeInterfaceU());
 		}
+		varExercizeB.walkAll();
 		
 	}
 
