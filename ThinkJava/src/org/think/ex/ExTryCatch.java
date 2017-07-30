@@ -74,6 +74,7 @@ public class ExTryCatch {
         catch (ComplexException ex)
         {
             System.out.println(ex);
+            ex.printStackTrace(System.out);
             System.out.println(ex.getCause());
         }
         catch (Exception ex)
