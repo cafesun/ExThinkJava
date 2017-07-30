@@ -4,15 +4,22 @@ import java.io.IOException;
 
 class SimpleException extends Exception {
 
-    public SimpleException() {
+    SimpleException() {
 
     }
 
-    public SimpleException(String strEx) {
+    SimpleException(String strEx) {
 
         super(strEx);
     }
 }
+
+class ComplexException extends Exception {
+    ComplexException(String strEx) {
+        super(strEx);
+    }
+}
+
 
 public class ExTryCatch {
 
@@ -24,15 +31,22 @@ public class ExTryCatch {
         throw new SimpleException("Hello Exception");
     }
 
-    public void doNullException() {
-        String strNull = null;
-        System.out.println(strNull.length());
+    public void doNullException() throws ComplexException {
+        try {
+            String strNull = null;
+            System.out.println(strNull.length());
+        }
+        catch (Exception ex) {
+            ComplexException varComplexEx = new ComplexException("Complex Exception!");
+            varComplexEx.initCause(ex);
+            throw varComplexEx;
+        }
     }
 
     public static void main(String[] args) {
 
+        ExTryCatch oTryEx = new ExTryCatch();
         try {
-            ExTryCatch oTryEx = new ExTryCatch();
             oTryEx.doException();
             //oTryEx.doNullException();
 
@@ -52,6 +66,19 @@ public class ExTryCatch {
         finally {
             // 即使捕获了异常，也会执行finally从句中的内容. finally从句中用于关闭资源.
             System.out.println("Catch UnKnownException!");
+        }
+
+        try {
+            oTryEx.doNullException();
+        }
+        catch (ComplexException ex)
+        {
+            System.out.println(ex);
+            System.out.println(ex.getCause());
+        }
+        catch (Exception ex)
+        {
+            System.out.println(ex);
         }
 
     }
