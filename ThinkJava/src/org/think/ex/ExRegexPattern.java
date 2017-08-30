@@ -14,6 +14,13 @@ public class ExRegexPattern {
             System.out.println("Regex expression = " + arg);
             Pattern oRegex = Pattern.compile(arg);
             Matcher oMatcher = oRegex.matcher(argv[0]);
+            if (Pattern.matches(argv[0], arg)) {
+                System.out.println("Match Result is True");
+            }
+            else
+            {
+                System.out.println("Match Result is False");
+            }
             while (oMatcher.find()) {
                 System.out.println("Match \"" + oMatcher.group() + "\" at positions:" +
                         oMatcher.start() + " - " + (oMatcher.end() -1 ));
