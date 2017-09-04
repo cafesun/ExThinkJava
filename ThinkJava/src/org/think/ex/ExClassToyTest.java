@@ -12,6 +12,10 @@ interface Shoots {
 
 }
 
+interface Pencil {
+
+}
+
 class Toy {
 
     Toy() {
@@ -23,7 +27,7 @@ class Toy {
 }
 
 class FancyToy extends Toy
-    implements HasBatteries, Waterproof, Shoots {
+    implements HasBatteries, Waterproof, Shoots, Pencil {
     FancyToy() {
         super(1);
     }
